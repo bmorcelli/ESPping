@@ -331,7 +331,7 @@ bool ping_start(IPAddress adr, int count=0, int interval=0, int size=0, int time
             ping_recv(s);
         }
         if(ping_seq_num < count){
-            delay( interval*1000L);
+            delay( interval*50L);
         }
     }
 
