@@ -280,7 +280,7 @@ bool ping_start(IPAddress adr, int count=0, int interval=0, int size=0, int time
     }
 
     if (timeout == 0) {
-        timeout = PING_DEFAULT_TIMEOUT;
+        timeout = PING_DEFAULT_TIMEOUT*100000;
     }
 
     // Create socket
@@ -297,8 +297,8 @@ bool ping_start(IPAddress adr, int count=0, int interval=0, int size=0, int time
     struct timeval tout;
 
     // Timeout
-    tout.tv_sec = timeout;
-    tout.tv_usec = 0;
+    tout.tv_sec = 0;
+    tout.tv_usec = timeout; // changed default timeout from 1s to 100ms
 
     if (setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, &tout, sizeof(tout)) < 0) {
         closesocket(s);
